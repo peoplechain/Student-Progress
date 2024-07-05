@@ -1,0 +1,8 @@
+Half Yearly Exam Details:
+English: 22.00
+Tamil: 22.00
+Maths: 22.00
+Science: 22.00
+Social Science: 22.00
+Percentage: 22.00
+Grade: F

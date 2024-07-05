@@ -1,0 +1,8 @@
+Quarterly Exam Details:
+English: 33.00
+Tamil: 33.00
+Maths: 33.00
+Science: 33.00
+Social Science: 33.00
+Percentage: 33.00
+Grade: F

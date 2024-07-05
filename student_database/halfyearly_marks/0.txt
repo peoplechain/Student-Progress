@@ -1,0 +1,8 @@
+Half Yearly Exam Details:
+English: -0.00
+Tamil: 0.00
+Maths: 0.00
+Science: 0.00
+Social Science: 0.00
+Percentage: -0.00
+Grade: F

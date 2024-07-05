@@ -1,0 +1,8 @@
+Annual Exam Details:
+English: 22.00
+Tamil: 22.00
+Maths: 22.00
+Science: 99.00
+Social Science: 99.00
+Percentage: 52.80
+Grade: C
