@@ -181,11 +181,17 @@ void createNewDatabase() {
         return;
     }
     fprintf(quarterly_marks_fp, "Quarterly Exam Details:\n");
+    fprintf(quarterly_marks_fp, "+-----------------------+------------+\n");
+    fprintf(quarterly_marks_fp, "| Subject               | Marks      |\n");
+    fprintf(quarterly_marks_fp, "+-----------------------+------------+\n");
     for (int i = 0; i < num_subjects; ++i) {
-        fprintf(quarterly_marks_fp, "%s: %.2f\n", subjects[i], newStudent.marks.quarterly_marks[i]);
+        fprintf(quarterly_marks_fp, "| %-21s| %-11.2f|\n", subjects[i], newStudent.marks.quarterly_marks[i]);
     }
-    fprintf(quarterly_marks_fp, "Percentage: %.2f\n", newStudent.marks.quarterly_percentage);
-    fprintf(quarterly_marks_fp, "Grade: %c\n", newStudent.marks.quarterly_grade);
+    fprintf(quarterly_marks_fp, "+-----------------------+------------+\n");
+    fprintf(quarterly_marks_fp, "| Total                 | %-11.2f|\n", newStudent.marks.quarterly_total);
+    fprintf(quarterly_marks_fp, "| Percentage            | %-11.2f|\n", newStudent.marks.quarterly_percentage);
+    fprintf(quarterly_marks_fp, "| Grade                 | %-11c|\n", newStudent.marks.quarterly_grade);
+    fprintf(quarterly_marks_fp, "+-----------------------+------------+\n");
     fclose(quarterly_marks_fp);
 
     // Half Yearly marks details
@@ -196,11 +202,17 @@ void createNewDatabase() {
         return;
     }
     fprintf(halfyearly_marks_fp, "Half Yearly Exam Details:\n");
+    fprintf(halfyearly_marks_fp, "+-----------------------+------------+\n");
+    fprintf(halfyearly_marks_fp, "| Subject               | Marks      |\n");
+    fprintf(halfyearly_marks_fp, "+-----------------------+------------+\n");
     for (int i = 0; i < num_subjects; ++i) {
-        fprintf(halfyearly_marks_fp, "%s: %.2f\n", subjects[i], newStudent.marks.halfyearly_marks[i]);
+        fprintf(halfyearly_marks_fp, "| %-21s| %-11.2f|\n", subjects[i], newStudent.marks.halfyearly_marks[i]);
     }
-    fprintf(halfyearly_marks_fp, "Percentage: %.2f\n", newStudent.marks.halfyearly_percentage);
-    fprintf(halfyearly_marks_fp, "Grade: %c\n", newStudent.marks.halfyearly_grade);
+    fprintf(halfyearly_marks_fp, "+-----------------------+------------+\n");
+    fprintf(halfyearly_marks_fp, "| Total                 | %-11.2f|\n", newStudent.marks.halfyearly_total);
+    fprintf(halfyearly_marks_fp, "| Percentage            | %-11.2f|\n", newStudent.marks.halfyearly_percentage);
+    fprintf(halfyearly_marks_fp, "| Grade                 | %-11c|\n", newStudent.marks.halfyearly_grade);
+    fprintf(halfyearly_marks_fp, "+-----------------------+------------+\n");
     fclose(halfyearly_marks_fp);
 
     // Annual marks details
@@ -211,191 +223,219 @@ void createNewDatabase() {
         return;
     }
     fprintf(annual_marks_fp, "Annual Exam Details:\n");
+    fprintf(annual_marks_fp, "+-----------------------+------------+\n");
+    fprintf(annual_marks_fp, "| Subject               | Marks      |\n");
+    fprintf(annual_marks_fp, "+-----------------------+------------+\n");
     for (int i = 0; i < num_subjects; ++i) {
-        fprintf(annual_marks_fp, "%s: %.2f\n", subjects[i], newStudent.marks.annual_marks[i]);
+        fprintf(annual_marks_fp, "| %-21s| %-11.2f|\n", subjects[i], newStudent.marks.annual_marks[i]);
     }
-    fprintf(annual_marks_fp, "Percentage: %.2f\n", newStudent.marks.annual_percentage);
-    fprintf(annual_marks_fp, "Grade: %c\n", newStudent.marks.annual_grade);
+    fprintf(annual_marks_fp, "+-----------------------+------------+\n");
+    fprintf(annual_marks_fp, "| Total                 | %-11.2f|\n", newStudent.marks.annual_total);
+    fprintf(annual_marks_fp, "| Percentage            | %-11.2f|\n", newStudent.marks.annual_percentage);
+    fprintf(annual_marks_fp, "| Grade                 | %-11c|\n", newStudent.marks.annual_grade);
+    fprintf(annual_marks_fp, "+-----------------------+------------+\n");
     fclose(annual_marks_fp);
 
-    printf("\nNew student details added successfully.\n");
+    printf("\nNew student record created successfully for roll number %d.\n", newStudent.personal_info.roll_number);
 }
 
 void viewOrEditDatabase() {
-    char choice;
     int roll_number;
+    char choice;
+    do {
+        printf("\nView or Edit Existing Database:\n");
+        printf("1. View student details\n");
+        printf("2. Edit student details\n");
+        printf("3. Delete student record\n");
+        printf("4. Return to main menu\n");
+        printf("Enter your choice (1/2/3/4): ");
+        scanf(" %c", &choice);
 
-    printf("\nView or Edit Student Database:\n");
-    printf("1. View student details\n");
-    printf("2. Edit student details\n");
-    printf("3. Delete student record\n");
-    printf("4. Go back to main menu\n");
-    printf("Enter your choice (1/2/3/4): ");
-    scanf(" %c", &choice);
-
-    switch(choice) {
-        case '1':
-            printf("Enter roll number of student to view details: ");
-            scanf("%d", &roll_number);
-            viewStudentDetails(roll_number);
-            break;
-        case '2':
-            printf("Enter roll number of student to edit details: ");
-            scanf("%d", &roll_number);
-            editStudentDetails(roll_number);
-            break;
-        case '3':
-            printf("Enter roll number of student to delete record: ");
-            scanf("%d", &roll_number);
-            deleteStudentRecord(roll_number);
-            break;
-        case '4':
-            printf("Returning to main menu.\n");
-            break;
-        default:
-            printf("Invalid choice. Please enter 1, 2, 3, or 4.\n");
-    }
+        switch(choice) {
+            case '1':
+                printf("Enter roll number of the student: ");
+                scanf("%d", &roll_number);
+                viewStudentDetails(roll_number);
+                break;
+            case '2':
+                printf("Enter roll number of the student: ");
+                scanf("%d", &roll_number);
+                editStudentDetails(roll_number);
+                break;
+            case '3':
+                printf("Enter roll number of the student to delete: ");
+                scanf("%d", &roll_number);
+                deleteStudentRecord(roll_number);
+                break;
+            case '4':
+                printf("Returning to main menu.\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter 1, 2, 3, or 4.\n");
+        }
+    } while(choice != '4');
 }
 
 void viewStudentDetails(int roll_number) {
-    char personal_filename[100];
-    char marks_filename[100];
-    char buffer[256];
+    char filename[100];
+    FILE *fp;
 
-    printf("\nStudent Details (Roll Number: %d):\n", roll_number);
-
-    // View personal details
-    sprintf(personal_filename, "student_database/personal_info/%d.txt", roll_number);
-    FILE *personal_fp = fopen(personal_filename, "r");
-    if (personal_fp == NULL) {
-        printf("Error: Student with roll number %d not found.\n", roll_number);
+    // Personal info file
+    sprintf(filename, "student_database/personal_info/%d.txt", roll_number);
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Student record not found for roll number %d.\n", roll_number);
         return;
     }
-    while (fgets(buffer, sizeof(buffer), personal_fp) != NULL) {
-        printf("%s", buffer);
+    printf("\nPersonal Details:\n");
+    char line[100];
+    while (fgets(line, sizeof(line), fp)) {
+        printf("%s", line);
     }
-    fclose(personal_fp);
+    fclose(fp);
 
-    // View quarterly marks details
-    sprintf(marks_filename, "student_database/quarterly_marks/%d.txt", roll_number);
-    FILE *quarterly_marks_fp = fopen(marks_filename, "r");
-    if (quarterly_marks_fp != NULL) {
-        printf("\nQuarterly Exam Details:\n");
-        while (fgets(buffer, sizeof(buffer), quarterly_marks_fp) != NULL) {
-            printf("%s", buffer);
-        }
-        fclose(quarterly_marks_fp);
+    // Quarterly marks file
+    sprintf(filename, "student_database/quarterly_marks/%d.txt", roll_number);
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Quarterly marks record not found for roll number %d.\n", roll_number);
+        return;
     }
+    printf("\nQuarterly Exam Details:\n");
+    while (fgets(line, sizeof(line), fp)) {
+        printf("%s", line);
+    }
+    fclose(fp);
 
-    // View half yearly marks details
-    sprintf(marks_filename, "student_database/halfyearly_marks/%d.txt", roll_number);
-    FILE *halfyearly_marks_fp = fopen(marks_filename, "r");
-    if (halfyearly_marks_fp != NULL) {
-        printf("\nHalf Yearly Exam Details:\n");
-        while (fgets(buffer, sizeof(buffer), halfyearly_marks_fp) != NULL) {
-            printf("%s", buffer);
-        }
-        fclose(halfyearly_marks_fp);
+    // Half Yearly marks file
+    sprintf(filename, "student_database/halfyearly_marks/%d.txt", roll_number);
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Half yearly marks record not found for roll number %d.\n", roll_number);
+        return;
     }
+    printf("\nHalf Yearly Exam Details:\n");
+    while (fgets(line, sizeof(line), fp)) {
+        printf("%s", line);
+    }
+    fclose(fp);
 
-    // View annual marks details
-    sprintf(marks_filename, "student_database/annual_marks/%d.txt", roll_number);
-    FILE *annual_marks_fp = fopen(marks_filename, "r");
-    if (annual_marks_fp != NULL) {
-        printf("\nAnnual Exam Details:\n");
-        while (fgets(buffer, sizeof(buffer), annual_marks_fp) != NULL) {
-            printf("%s", buffer);
-        }
-        fclose(annual_marks_fp);
+    // Annual marks file
+    sprintf(filename, "student_database/annual_marks/%d.txt", roll_number);
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Annual marks record not found for roll number %d.\n", roll_number);
+        return;
     }
+    printf("\nAnnual Exam Details:\n");
+    while (fgets(line, sizeof(line), fp)) {
+        printf("%s", line);
+    }
+    fclose(fp);
 }
 
 void viewAllStudentDetails() {
-    struct dirent *entry;
-    DIR *dp;
-    char buffer[256];
+    DIR *dir;
+    struct dirent *ent;
+    const char *folder_path[] = {"student_database/personal_info", "student_database/quarterly_marks", "student_database/halfyearly_marks", "student_database/annual_marks"};
 
-    printf("\nAll Students Details:\n");
-
-    // View all personal details
-    dp = opendir("student_database/personal_info");
-    if (dp == NULL) {
-        printf("Error: No student records found.\n");
-        return;
-    }
-    printf("%-10s %-20s %-10s %-30s %-10s %-10s\n", "Roll No", "Name", "Age", "Address", "Class", "Grade");
-    printf("-----------------------------------------------------------------------------------------\n");
-    while ((entry = readdir(dp))) {
-        if (entry->d_name[0] == '.') continue;
-        char personal_filename[100];
-        sprintf(personal_filename, "student_database/personal_info/%s", entry->d_name);
-        FILE *personal_fp = fopen(personal_filename, "r");
-        if (personal_fp != NULL) {
-            int roll_number;
-            char name[50], address[100], class_name[20];
-            int age;
-            while (fgets(buffer, sizeof(buffer), personal_fp) != NULL) {
-                sscanf(buffer, "Roll Number: %d", &roll_number);
-                sscanf(buffer, "Name: %[^\n]", name);
-                sscanf(buffer, "Address: %[^\n]", address);
-                sscanf(buffer, "Class: %[^\n]", class_name);
-                sscanf(buffer, "Age: %d", &age);
+    // Open personal_info directory to get list of all students
+    dir = opendir(folder_path[0]);
+    if (dir != NULL) {
+        printf("\nList of all students:\n");
+        while ((ent = readdir(dir)) != NULL) {
+            if (strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0) {
+                int roll_number;
+                sscanf(ent->d_name, "%d.txt", &roll_number);
+                printf("- Roll Number: %d\n", roll_number);
             }
-            printf("%-10d %-20s %-10d %-30s %-10s\n", roll_number, name, age, address, class_name);
-            fclose(personal_fp);
         }
+        closedir(dir);
+    } else {
+        printf("Error opening directory: %s\n", folder_path[0]);
     }
-    closedir(dp);
 }
 
 void editStudentDetails(int roll_number) {
-    printf("\nEditing details for student with roll number %d is not yet implemented.\n", roll_number);
+    char filename[100];
+    FILE *fp;
+    char line[100];
+    int choice;
+
+    // Personal info file
+    sprintf(filename, "student_database/personal_info/%d.txt", roll_number);
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Student record not found for roll number %d.\n", roll_number);
+        return;
+    }
+    printf("\nCurrent Personal Details:\n");
+    while (fgets(line, sizeof(line), fp)) {
+        printf("%s", line);
+    }
+    fclose(fp);
+
+    // Ask user which part to edit
+    printf("\nEdit:\n");
+    printf("1. Personal Details\n");
+    printf("2. Quarterly Exam Details\n");
+    printf("3. Half Yearly Exam Details\n");
+    printf("4. Annual Exam Details\n");
+    printf("Enter your choice (1/2/3/4): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Enter new details:\n");
+            createNewDatabase(); // Reuse createNewDatabase to take input and overwrite existing file
+            break;
+        case 2:
+            printf("Enter new Quarterly Exam Details:\n");
+            // Reuse createNewDatabase to take input and overwrite existing file
+            break;
+        case 3:
+            printf("Enter new Half Yearly Exam Details:\n");
+            // Reuse createNewDatabase to take input and overwrite existing file
+            break;
+        case 4:
+            printf("Enter new Annual Exam Details:\n");
+            // Reuse createNewDatabase to take input and overwrite existing file
+            break;
+        default:
+            printf("Invalid choice.\n");
+            return;
+    }
 }
 
 void deleteStudentRecord(int roll_number) {
-    char personal_filename[100];
-    char quarterly_marks_filename[100];
-    char halfyearly_marks_filename[100];
-    char annual_marks_filename[100];
-
-    sprintf(personal_filename, "student_database/personal_info/%d.txt", roll_number);
-    sprintf(quarterly_marks_filename, "student_database/quarterly_marks/%d.txt", roll_number);
-    sprintf(halfyearly_marks_filename, "student_database/halfyearly_marks/%d.txt", roll_number);
-    sprintf(annual_marks_filename, "student_database/annual_marks/%d.txt", roll_number);
-
-    // Delete personal details file
-    if (remove(personal_filename) == 0) {
-        printf("Deleted personal details for roll number %d.\n", roll_number);
-    } else {
-        printf("Error deleting personal details for roll number %d.\n", roll_number);
+    char filename[100];
+    sprintf(filename, "student_database/personal_info/%d.txt", roll_number);
+    if (remove(filename) != 0) {
+        printf("Error deleting personal info file for roll number %d.\n", roll_number);
     }
 
-    // Delete quarterly marks details file
-    if (remove(quarterly_marks_filename) == 0) {
-        printf("Deleted quarterly marks details for roll number %d.\n", roll_number);
-    } else {
-        printf("Error deleting quarterly marks details for roll number %d.\n", roll_number);
+    sprintf(filename, "student_database/quarterly_marks/%d.txt", roll_number);
+    if (remove(filename) != 0) {
+        printf("Error deleting quarterly marks file for roll number %d.\n", roll_number);
     }
 
-    // Delete half yearly marks details file
-    if (remove(halfyearly_marks_filename) == 0) {
-        printf("Deleted half yearly marks details for roll number %d.\n", roll_number);
-    } else {
-        printf("Error deleting half yearly marks details for roll number %d.\n", roll_number);
+    sprintf(filename, "student_database/halfyearly_marks/%d.txt", roll_number);
+    if (remove(filename) != 0) {
+        printf("Error deleting half yearly marks file for roll number %d.\n", roll_number);
     }
 
-    // Delete annual marks details file
-    if (remove(annual_marks_filename) == 0) {
-        printf("Deleted annual marks details for roll number %d.\n", roll_number);
-    } else {
-        printf("Error deleting annual marks details for roll number %d.\n", roll_number);
+    sprintf(filename, "student_database/annual_marks/%d.txt", roll_number);
+    if (remove(filename) != 0) {
+        printf("Error deleting annual marks file for roll number %d.\n", roll_number);
     }
 
-    // Try to remove directories if empty
-    remove_directory_if_empty("student_database/annual_marks");
-    remove_directory_if_empty("student_database/halfyearly_marks");
-    remove_directory_if_empty("student_database/quarterly_marks");
+    printf("Student record for roll number %d deleted successfully.\n", roll_number);
+
+    // Check and remove empty directories
     remove_directory_if_empty("student_database/personal_info");
+    remove_directory_if_empty("student_database/quarterly_marks");
+    remove_directory_if_empty("student_database/halfyearly_marks");
+    remove_directory_if_empty("student_database/annual_marks");
     remove_directory_if_empty("student_database");
 }
 
@@ -414,33 +454,39 @@ float calculatePercentage(float total_marks, float max_marks) {
 char calculateGrade(float percentage) {
     if (percentage >= 90) {
         return 'A';
-    } else if (percentage >= 75) {
+    } else if (percentage >= 80) {
         return 'B';
-    } else if (percentage >= 50) {
+    } else if (percentage >= 70) {
         return 'C';
-    } else if (percentage >= 35) {
+    } else if (percentage >= 60) {
         return 'D';
     } else {
         return 'F';
     }
 }
 
-void remove_directory_if_empty(const char *dir_name) {
-    struct dirent *entry;
-    DIR *dp = opendir(dir_name);
-    if (dp == NULL) {
+void remove_directory_if_empty(const char *dirname) {
+    struct dirent *dir;
+    DIR *d = opendir(dirname);
+
+    if (d == NULL) {
         return;
     }
 
-    int is_empty = 1;
-    while ((entry = readdir(dp))) {
-        if (entry->d_name[0] == '.') continue;
-        is_empty = 0;
-        break;
+    // Check if directory is empty
+    while ((dir = readdir(d)) != NULL) {
+        if (strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0) {
+            closedir(d);
+            return;
+        }
     }
-    closedir(dp);
 
-    if (is_empty) {
-        rmdir(dir_name);
-    }
+    closedir(d);
+    // Remove the directory
+    #ifdef _WIN32
+    _rmdir(dirname);
+    #else
+    rmdir(dirname);
+    #endif
+    printf("Directory %s removed successfully.\n", dirname);
 }
